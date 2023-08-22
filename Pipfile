@@ -1,0 +1,32 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+python-dotenv = "*"
+pytest-env = "*"
+moto = "*"
+pytest = "*"
+ruff = "*"
+black = "*"
+poetry = "*"
+coverage = "*"
+
+[packages]
+requests = "*"
+requests-oauthlib = "*"
+boto3 = "*"
+python-dateutil = "*"
+unleashclient = "*"
+pyyaml = "*"
+inflection = "*"
+httpx = "*"
+multipart = "*"
+python-multipart = "*"
+asgiref = "*"
+flask = "*"
+ratelimiter = "*"
+
+[requires]
+python_version = "3.8"

@@ -1,0 +1,122 @@
+[project]
+# this is for pip-audit
+# poetry doesn't recoginize this section
+requires-python = ">=3.8"
+dependencies = [
+
+]
+
+[tool.poetry]
+name = "loc_copyright_shared_lambda"
+packages = [
+    {include = "copyright_shared_lambda"}
+]
+version = "1.0.1"
+description = "ECS Shared Python Code"
+authors = [
+    "Matthew Martin <mmartin@loc.gov>",
+]
+
+include = [
+    "copyright_shared_lambda/**/*.py",
+    "copyright_shared_lambda/**/*.yaml",
+    "copyright_shared_lambda/**/*.md",
+    "copyright_shared_lambda/**/*.ini",
+    "copyright_shared_lambda/py.typed",
+]
+exclude = [
+    ".env"
+]
+
+[tool.poetry.dependencies]
+python = ">=3.8,<4"
+boto3 = "==1.17.28"
+python-dateutil = "==2.8.1"
+requests = "==2.25.1"
+requests-oauthlib = "==1.3.0"
+UnleashClient = "==5.4.0"
+pyyaml = "*"
+
+
+[tool.poetry.dev-dependencies]
+# absolute minimum
+pytest = "*"
+pytest-env = "*"
+ruff = "*"
+black = "*"
+poetry = "*"
+coverage = "*"
+
+[tool.black]
+line-length = 100
+target-version = ['py311']
+include = '\.pyi?$'
+exclude = '''
+
+(
+  /(
+      \.eggs         # exclude a few common directories in the
+    | \.git          # root of the project
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+  )/
+  | foo.py           # also separately exclude a file named foo.py in
+                     # the root of the project
+)
+'''
+
+[tool.ruff]
+line-length = 100
+
+# Enable Pyflakes `E` and `F` codes by default.
+select = ["E", "F"]
+ignore = ["E722", "E501"]
+
+# Exclude a variety of commonly ignored directories.
+exclude = [
+"dead_code",
+".bzr",
+".direnv",
+".eggs",
+".git",
+".hg",
+".mypy_cache",
+".nox",
+".pants.d",
+".ruff_cache",
+".svn",
+".tox",
+".venv",
+"__pypackages__",
+"_build",
+"buck-out",
+"build",
+"dist",
+"node_modules",
+"venv",
+]
+per-file-ignores = {}
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+# Assume Python 3.8.
+target-version = "py38"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
+
+[tool.pytest.ini_options]
+# pypi package pytest-env must be installed in dev-packages order for tests to run
+# many test depend on these env variables being set, another option is to set in tests or fixtures 
+env = [
+    "AWS_DEFAULT_REGION=us-east-1",
+    "SECRETSMANAGER_SECRET_ARN=test"
+]

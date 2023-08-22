@@ -1,0 +1,6 @@
+stages:
+    - validate
+
+include:
+    - project: "DevOps/pre-commit-docker"
+      file: templates/pre-commit.yml
