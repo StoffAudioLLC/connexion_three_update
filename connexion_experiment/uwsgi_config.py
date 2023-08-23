@@ -3,7 +3,7 @@ from typing import Any, Optional
 
 import connexion
 from connexion.lifecycle import ConnexionResponse
-
+from .controllers import controller_utils
 import connexion_experiment.global_app as global_app
 from connexion_experiment.global_app import APP
 
@@ -11,9 +11,7 @@ from ratelimit.auths.ip import client_ip
 from ratelimit import RateLimitMiddleware, Rule
 from ratelimit.backends.simple import MemoryBackend
 from starlette.types import Receive, Scope, Send
-from ipaddress import ip_address
-from typing import Tuple
-from starlette.types import Receive, Scope, Send
+
 
 
 LOGGER = logging.getLogger(__name__)
@@ -50,35 +48,15 @@ global_app.APP.add_api(
 )
 
 
-async def client_ip_own(scope: Scope) -> Tuple[str, str]:
-    """
-    parse ip
-    """
-    return "127.0.0.0", "default"
-
-
-def yourself_429(retry_after: int):
-    async def inside_yourself_429(scope: Scope, receive: Receive, send: Send) -> None:
-        await send({"type": "http.response.start", "status": 429})
-        await send(
-            {
-                "type": "http.response.body",
-                "body": b"TOO MANY REQUESTS",
-                "more_body": False,
-            }
-        )
-
-    return inside_yourself_429
-
 rate_limit = RateLimitMiddleware(
     global_app.APP,
-    client_ip_own,  # switch out
+    controller_utils.client_ip,  # switch out
     MemoryBackend(),
     {
         r"^/environment": [Rule(second=1), Rule(group="admin")],
         r"^/version": [Rule(minute=100), Rule(group="admin")],
     },
-    on_blocked=yourself_429,
+    on_blocked=controller_utils.yourself_429,
 )
 
 # broken too
