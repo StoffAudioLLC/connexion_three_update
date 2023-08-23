@@ -1,4 +1,11 @@
+"""Creates a request to the server hosted at 127.0.0.1:8893"""
 import requests
-for _ in range(100):
-    response = requests.get('http://127.0.0.1:8893/hello')
-    print(f"Status code: {response.status_code}")
+import xmltodict
+
+headers = {"Accept": "application/xml"}
+for _ in range(1):
+    response = requests.get("http://127.0.0.1:8893/environment", headers=headers)
+    mime_type = response.headers.get("Content-Type")
+    print("MIME Type:", mime_type)
+    dict_data = xmltodict.parse(response.content)
+    print(dict_data)

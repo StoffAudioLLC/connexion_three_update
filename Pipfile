@@ -27,6 +27,9 @@ python-multipart = "*"
 asgiref = "*"
 flask = "*"
 ratelimiter = "*"
+asgi-ratelimit = {extras = ["full"], version = "*"}
+xmltodict = "*"
+connexion = {extras = ["flask"], version = "==3.0.0a6"}
 
 [requires]
 python_version = "3.8"

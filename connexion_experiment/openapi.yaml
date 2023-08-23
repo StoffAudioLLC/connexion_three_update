@@ -1,0 +1,53 @@
+---
+"openapi": "3.0.0"
+info:
+    title: Tiny example
+    description: Tiny example
+    version: 3.0.1
+servers:
+    -   url: /
+paths:
+    /environment:
+        get:
+            summary: Display environment in effect
+            operationId: connexion_experiment.environment
+            tags:
+                - utility
+            responses:
+                "200":
+                    description: Expected response to a valid request
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                                example: "DEV"
+                        text/plain:
+                            schema:
+                                type: string
+                                example: "DEV"
+                        application/pdf:
+                            schema:
+                                type: object
+                                example: "DEV"
+                        application/xml:
+                            schema:
+                                type: string
+                                example: "DEV"
+    /version:
+        get:
+            summary: Display version of python module
+            operationId: connexion_experiment.version
+            tags:
+                - utility
+            responses:
+                "200":
+                    description: Expected response to a valid request
+                    content:
+                        application/json:
+                            schema:
+                                type: string
+                                example: 1.2.3
+                        text/plain:
+                            schema:
+                                type: string
+                                example: 1.2.3
