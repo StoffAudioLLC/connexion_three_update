@@ -5,8 +5,6 @@ import os
 
 import connexion
 
-
-# return "Too many tries", 425
-APP = connexion.FlaskApp(
+APP = connexion.AsyncApp(
     __name__, specification_dir=os.environ.get("OPENAPI_LOCATION", ".")
 )
