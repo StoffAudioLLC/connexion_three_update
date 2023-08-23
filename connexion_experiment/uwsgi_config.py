@@ -70,9 +70,6 @@ def yourself_429(retry_after: int):
 
     return inside_yourself_429
 
-
-# You need the FLASK_APP attribute to launch/debug as a flask app.
-# FLASK_APP = global_app.APP.app
 rate_limit = RateLimitMiddleware(
     global_app.APP,
     client_ip_own,  # switch out
