@@ -11,3 +11,9 @@
 ## To test server:
 
     python ./tests/request_test.py
+
+### Features:
+
+-ASGI Ratelimiting
+
+-Example of Mime type parsing
