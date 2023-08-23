@@ -1,6 +1,10 @@
 # Install:
+
+    cd connexion_three_update-master
     Pipenv install --dev
-# To run server:
+    Pipenv shell
+
+## To run server:
 
     uvicorn connexion_experiment.uwsgi_config:rate_limit --port=8893
 
